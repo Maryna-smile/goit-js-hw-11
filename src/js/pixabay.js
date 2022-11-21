@@ -24,12 +24,3 @@ fetchPhotos() {
     return axios.get(`${this.#BASE_URL}`, searchParams);
   }
 }
-//     return fetch (`${this.#BASE_URL}?${searchParams}`)
-//     .then(response => {
-//       if(!response.ok){
-//         throw new Error(response.status);
-//       }
-//       return response.json();
-//     });
-// }
-// }
