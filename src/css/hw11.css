@@ -2,15 +2,27 @@
     --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --animation-duration: 250ms;
 }
-
-body {
-    margin: auto;
+.light-theme {
+     margin: auto;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     overflow: auto;
     background: linear-gradient(315deg, rgb(238, 224, 31) 3%, rgb(88, 154, 219) 38%, rgb(77, 164, 223) 68%, rgb(210, 226, 67) 98%);
     animation: gradient 15s ease infinite;
     background-size: 400% 400%;
     background-attachment: fixed;
+    color: #17161a;
+}
+
+.dark-theme {
+    
+    margin: auto;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    overflow: auto;
+    background: linear-gradient(315deg, rgb(39, 2, 73) 3%, rgb(3, 48, 94) 38%, rgb(69, 1, 75) 68%, rgb(114, 42, 1) 98%);
+    animation: gradient 15s ease infinite;
+    background-size: 400% 400%;
+    background-attachment: fixed;
+    color: #b6aaff;
 }
 
 @keyframes gradient {
@@ -74,7 +86,7 @@ body {
     position: relative;
     padding: 0 0 0 60px;
     cursor: pointer;
-    color: rgb(7, 3, 73);
+    color: rgb(131, 126, 233);
 }
 
 .checkbox+label:before {
@@ -173,13 +185,13 @@ transform: scale(1.03);
 }
 
 .info {
-
     padding: 10px;
-    background-color: #f7f8f4;
+    /* background-color: #b3b3ae; */
 }
 
 b {
     margin-right: 5px;
     font-size: 12;
     font-weight: 600;
-}
+}/* ---------------------------------------theme----------------------------------------- */
+

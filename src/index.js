@@ -1,12 +1,19 @@
 import './css/hw11.css';
 import Notiflix from 'notiflix';
-import axios from 'axios';
+// import axios from 'axios';
 import { PixabayApi } from './js/pixabay.js';
 import makeGalleryCard from './templates/galleryCard.hbs';
+import onInputChange from "./js/onInputChange.js";
 
 const searchFormRef = document.querySelector('.search-form');
 const galleryRef = document.querySelector('.gallery');
 const loadMoreBtnRef = document.querySelector('.load-more-btn');
+
+
+const inputCheckbox = document.querySelector(".checkbox");
+const body = document.querySelector("body");
+
+
 
 const pixabayApi = new PixabayApi();
 
@@ -24,6 +31,7 @@ const onSearchFormSubmit = async event => {
             loadMoreBtnRef.classList.add('is-hidden');
             return;
         }
+
         if (data.totalHits === 0) {
             Notiflix.Notify.failure("Ото запит!!! 😡 В нас таких картинок немає :((");
             event.target.elements.searchQuery.value = "";
@@ -66,6 +74,23 @@ const onLoadMoreBtnClick = async event => {
 };
 
 searchFormRef.addEventListener('submit', onSearchFormSubmit);
+// kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+
+inputCheckbox.addEventListener("change", onInputChange);
+
+function checkTheme() {
+
+  const savedTheme = localStorage.getItem("theme");
+
+  if (savedTheme === "dark-theme") {
+    inputCheckbox.checked = true;
+    body.classList.replace("light-theme", "dark-theme");
+    
+  }
+};
+
+checkTheme();
+// kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
 
 // const { height: cardHeight } = document.querySelector(".gallery")
 //   .firstElementChild.getBoundingClientRect();
