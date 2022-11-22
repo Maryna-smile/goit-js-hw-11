@@ -7,7 +7,7 @@ import onInputChange from "./js/onInputChange.js";
 // ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
-const lightbox = new SimpleLightbox('.gallery a', { CaptionDelay: 250, captionsData: 'alt' });
+const lightbox = new SimpleLightbox('.gallery a', { CaptionDelay: 250 });
 // ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -69,6 +69,10 @@ const onLoadMoreBtnClick = async event => {
         const { data } = await pixabayApi.fetchPhotos();
         galleryRef.insertAdjacentHTML('beforeend', makeGalleryCard(data.hits));
         lightbox.refresh();
+
+        if ( pixabayApi.page === Math.ceil(data.totalHits/40)) {
+            loadMoreBtnRef.classList.add('is-hidden');
+        }
 
         if (data.totalHits === pixabayApi.page) {
             Notiflix.Notify.info("Баста, карапузікі, кончіліся танци... 😪 більше картинок немає, це все");
