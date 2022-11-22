@@ -46,12 +46,12 @@ const onSearchFormSubmit = async event => {
             return;
         }
 
-        if (data.totalHits < 41) {
+        if (data.totalHits < pixabayApi.per_page) {
             galleryRef.innerHTML = makeGalleryCard(data.hits);
             lightbox.refresh();
             return;
         }
-        Notiflix.Notify.info(`Урррра - э контакт, ми знайшли ${data.totalHits} фоточок :))`);
+        Notiflix.Notify.info(`Урррра - є контакт, ми знайшли ${data.totalHits} фоточок :))`);
         galleryRef.innerHTML = makeGalleryCard(data.hits);
         lightbox.refresh();
         loadMoreBtnRef.classList.remove('is-hidden');
@@ -70,7 +70,7 @@ const onLoadMoreBtnClick = async event => {
         galleryRef.insertAdjacentHTML('beforeend', makeGalleryCard(data.hits));
         lightbox.refresh();
 
-        if ( pixabayApi.page === Math.ceil(data.totalHits/40)) {
+        if ( pixabayApi.page === Math.ceil(data.totalHits / pixabayApi.per_page)) {
             loadMoreBtnRef.classList.add('is-hidden');
         }
 
@@ -95,7 +95,7 @@ const onLoadMoreBtnClick = async event => {
 };
 
 searchFormRef.addEventListener('submit', onSearchFormSubmit);
-// theme
+// ------------------theme--------------------
 
 inputCheckbox.addEventListener("change", onInputChange);
 
