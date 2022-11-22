@@ -2,8 +2,9 @@
     --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --animation-duration: 250ms;
 }
+
 .light-theme {
-     margin: auto;
+    margin: auto;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     overflow: auto;
     background: linear-gradient(315deg, rgb(238, 224, 31) 3%, rgb(88, 154, 219) 38%, rgb(77, 164, 223) 68%, rgb(210, 226, 67) 98%);
@@ -14,7 +15,7 @@
 }
 
 .dark-theme {
-    
+
     margin: auto;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     overflow: auto;
@@ -152,8 +153,8 @@
 }
 
 .load-more-btn:hover,
-.search-btn:hover{
-transform: scale(1.03);
+.search-btn:hover {
+    transform: scale(1.03);
 }
 
 /* ---------------------------------------gallery----------------------------------------- */
@@ -193,5 +194,6 @@ b {
     margin-right: 5px;
     font-size: 12;
     font-weight: 600;
-}/* ---------------------------------------theme----------------------------------------- */
+}
 
+/* ---------------------------------------theme----------------------------------------- */

@@ -1,14 +1,14 @@
-
 {{#each this}}
 <li class="photo-card">
-  <img src="{{this.webformatURL}}" alt="{{this.tags}}" loading="lazy" width="220" height="160" class="gallery-img"/>
+  <a href="{{this.largeImageURL}}" class="gallery__link"></a>
+  <img src="{{this.webformatURL}}" alt="{{this.tags}}" loading="lazy" width="220" height="160" class="gallery-img" />
   <div class="info">
     <p class="info-item">
       <b>Likes - {{this.likes}}</b>
     </p>
     <p class="info-item">
       <b>Views - {{this.views}}</b>
-    </p> 
+    </p>
     <p class="info-item">
       <b>Comments - {{this.comments}}</b>
     </p>

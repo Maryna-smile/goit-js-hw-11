@@ -1,9 +1,15 @@
 import './css/hw11.css';
 import Notiflix from 'notiflix';
-// import axios from 'axios';
 import { PixabayApi } from './js/pixabay.js';
 import makeGalleryCard from './templates/galleryCard.hbs';
 import onInputChange from "./js/onInputChange.js";
+
+// ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
+const lightbox = new SimpleLightbox('.gallery a', { CaptionDelay: 250, captionsData: 'alt' });
+// ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 
 const searchFormRef = document.querySelector('.search-form');
 const galleryRef = document.querySelector('.gallery');
@@ -22,7 +28,7 @@ const onSearchFormSubmit = async event => {
 
     pixabayApi.page = 1;
     pixabayApi.searchQuery = event.target.elements.searchQuery.value;
-  
+
     try {
         const { data } = await pixabayApi.fetchPhotos();
 
@@ -42,13 +48,15 @@ const onSearchFormSubmit = async event => {
 
         if (data.totalHits < 41) {
             galleryRef.innerHTML = makeGalleryCard(data.hits);
+            lightbox.refresh();
             return;
         }
-
+        Notiflix.Notify.info(`Урррра - э контакт, ми знайшли ${data.totalHits} фоточок :))`);
         galleryRef.innerHTML = makeGalleryCard(data.hits);
+        lightbox.refresh();
         loadMoreBtnRef.classList.remove('is-hidden');
         loadMoreBtnRef.addEventListener('click', onLoadMoreBtnClick);
-       
+
     } catch (err) {
         console.log(err);
     }
@@ -58,8 +66,9 @@ const onLoadMoreBtnClick = async event => {
 
     try {
         pixabayApi.page += 1;
-        const {data} = await pixabayApi.fetchPhotos();
+        const { data } = await pixabayApi.fetchPhotos();
         galleryRef.insertAdjacentHTML('beforeend', makeGalleryCard(data.hits));
+        lightbox.refresh();
 
         if (data.totalHits === pixabayApi.page) {
             Notiflix.Notify.info("Баста, карапузікі, кончіліся танци... 😪 більше картинок немає, це все");
@@ -70,35 +79,35 @@ const onLoadMoreBtnClick = async event => {
         console.log(err);
     }
 
+    const { height: cardHeight } = document
+        .querySelector(".gallery")
+        .firstElementChild.getBoundingClientRect();
+
+    window.scrollBy({
+        top: cardHeight * 3,
+        behavior: "smooth",
+    });
 
 };
 
 searchFormRef.addEventListener('submit', onSearchFormSubmit);
-// kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+// theme
 
 inputCheckbox.addEventListener("change", onInputChange);
 
 function checkTheme() {
 
-  const savedTheme = localStorage.getItem("theme");
+    const savedTheme = localStorage.getItem("theme");
 
-  if (savedTheme === "dark-theme") {
-    inputCheckbox.checked = true;
-    body.classList.replace("light-theme", "dark-theme");
-    
-  }
+    if (savedTheme === "dark-theme") {
+        inputCheckbox.checked = true;
+        body.classList.replace("light-theme", "dark-theme");
+
+    }
 };
 
 checkTheme();
-// kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
 
-// const { height: cardHeight } = document.querySelector(".gallery")
-//   .firstElementChild.getBoundingClientRect();
-
-// window.scrollBy({
-//   top: cardHeight * 2,
-//   behavior: "smooth",
-// });
 
 
 
